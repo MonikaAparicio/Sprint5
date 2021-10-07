@@ -65,13 +65,13 @@ def sing_in():
 # acceso como administrador, debe ir al panel de administrador
 @app.route('/signin_admin', methods=['POST'])
 def signin_admin():
-    email = request.form["email"]
+    emailin = request.form["email"]
     passwordin = request.form["password"]
 
-    user = NewUser.query.filter_by(email=email).first() 
-    password_ok = NewUser.query.password.first() 
+    user = NewUser.query.filter_by(email = emailin).first() 
+    password_ok = NewUser.query.by(password = passwordin).first() 
 
-    if ((email == user.email) and (passwordin == password_ok.password)):
+    if ((emailin == user.email) and (passwordin == password_ok.password)):
         return render_template ("paneladmin.html")
     else:
         return "Usuario o contraseña incorrectos"
