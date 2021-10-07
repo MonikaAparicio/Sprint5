@@ -86,8 +86,8 @@ else:
 def sing_in():
     return  render_template("signin_grocer.html") # Acceso
 
-@app.route('/signin_admin', methods=['POST'])
-def signin_admin():
+@app.route('/signin_grocerin', methods=['POST'])
+def signin_grocerin():
     email = request.form["email"]
     passwordin = request.form["password"]
     print ("Bienvenido" , email, passwordin)
