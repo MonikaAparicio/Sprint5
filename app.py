@@ -61,7 +61,8 @@ def create_user():
 @app.route('/signin')
 def sing_in():
     return  render_template("signin_admin.html")
-'''
+
+
 # acceso como administrador, debe ir al panel de administrador
 @app.route('/signin_admin', methods=['POST'])
 def signin_admin():
@@ -69,7 +70,7 @@ def signin_admin():
     passwordin = request.form["password"]
     print ("Bienvenido" , email, passwordin)
     #return (email, passwordin)
-'''
+
 '''def get_user():
     user = NewUser.query.email() 
     password_ok = NewUser.query.password()
