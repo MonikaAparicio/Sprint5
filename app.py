@@ -67,22 +67,17 @@ def sing_in():
 def signin_admin():
     email = request.form["email"]
     passwordin = request.form["password"]
-    user = User(email, passwordin)  
-    db.session.add(user)  #creado y agregado a base de datos
-    db.session.commit()
-    return ("Bienvenido")
-    
-'''def get_user():
-    user = NewUser.query.email() 
-    password_ok = NewUser.query.password()
-    return (user, password_ok) 
-if email == user & passwordin==pasword_ok:
-    print ("Bienvenido Administrador")
-    # enviar a panel de administrador
-else:
-    print ("Acceso Denegado")
-    # retornar a home'''
 
+    user = NewUser.query.filter_by(email=email).first() 
+    password_ok = NewUser.query.password.first() 
+
+    if ((email == user.email) and (passwordin == password_ok.password)):
+        return render_template ("paneladmin.html")
+    else:
+        return "Usuario o contraseña incorrectos"
+    # devolver a  /signin_admin
+
+'''
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
 def sing_grocer():
@@ -96,7 +91,7 @@ def signin_grocerin():
     db.session.add(user)  #creado y agregado a base de datos
     db.session.commit()
     return ("Bienvenido Tendero")
-
+'''
 '''
 @app.route('/adminstock')
 def admin_stock():
@@ -259,6 +254,6 @@ def crud_product(): # metodo, para probar es con postman
         return "Registro Exitoso"
 
      '''
-
+# para que corra desde el servidor remoto
 if __name__ == "__main__":
 	    app.run()
