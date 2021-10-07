@@ -78,12 +78,12 @@ def signin_admin():
     password_ok = NewUser.query.password()
     return (user, password_ok) 
 if email == user & passwordin==pasword_ok:
-    print ("Bienvenido")
+    print ("Bienvenido Administrador")
     # enviar a panel de administrador
 else:
     print ("Acceso Denegado")
     # retornar a home'''
-'''
+
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
 def sing_in():
@@ -93,9 +93,11 @@ def sing_in():
 def signin_grocerin():
     email = request.form["email"]
     passwordin = request.form["password"]
-    print ("Bienvenido" , email, passwordin)
-    #return (email, passwordin)
-'''
+    user = User(email, passwordin)  
+    db.session.add(user)  #creado y agregado a base de datos
+    db.session.commit()
+    return ("Bienvenido Tendero")
+
 '''
 @app.route('/adminstock')
 def admin_stock():
