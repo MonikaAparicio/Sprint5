@@ -62,7 +62,6 @@ def create_user():
 def sing_in():
     return  render_template("signin_admin.html")
 
-
 # acceso como administrador, debe ir al panel de administrador
 @app.route('/signin_admin', methods=['POST'])
 def signin_admin():
@@ -86,7 +85,7 @@ else:
 
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
-def sing_in():
+def sing_grocer():
     return  render_template("signin_grocer.html") # Acceso
 
 @app.route('/signin_grocerin', methods=['POST'])
