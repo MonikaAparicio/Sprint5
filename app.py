@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from flask.wrappers import Request #request importado para manejar peticiones que llegan al servidor
 from flask_sqlalchemy import SQLAlchemy #importada para trabajar de python a SQL bases de datos
 from sqlalchemy.orm import session
@@ -36,7 +36,7 @@ def get_home():
 # ingreso para registro, viene de home
 @app.route('/signup')
 def sing_up():
-    return  render_template("register.html") #'Aqui va redirigido a otra html con el formulario de registro /sign_updata
+    return  render_template("register.html") 
 
 
 # post de los datos del registro, viene de signup
@@ -53,9 +53,8 @@ def create_user():
     newuser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
     db.session.add(newuser)  #creado y agregado a base de datos
     db.session.commit()
-    return ("Usuario creado con exito ")
-
-    # falta hacer que regrese a home
+    #return ("Usuario creado con exito ")
+    return redirect(url_for("get_home"))    # falta hacer que regrese a home
       
 # ingreso para ingreso, viene de home Administrador
 @app.route('/signin')
