@@ -76,7 +76,7 @@ class User(db.Model):
         self.password = password
 
 #tabla nuevo usuario
-class NewUser (db.Model):
+class NewUser(db.Model):
     __tablename__ = 'NewUser'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -89,10 +89,11 @@ class NewUser (db.Model):
     lastname = db.Column(db.String)
     birthDate =db.Column(db.String)
 
-    def __init__(self, email, password, telephone, role, name, lastname, birthDate):
+    def __init__(self, email, password, cedula, telephone, role, name, lastname, birthDate):
     #def __init__(self, email, password):
         self.email = email
         self.password = password
+        self.cedula = cedula
         self.telephone = telephone
         self.role = role
         self.name = name

@@ -38,6 +38,7 @@ def get_home():
 def sing_up():
     return  render_template("register.html") #'Aqui va redirigido a otra html con el formulario de registro /sign_updata
 
+
 # post de los datos del registro, viene de signup
 @app.route('/create_user', methods=['POST'])
 def create_user():
@@ -49,9 +50,8 @@ def create_user():
     name = request.form["name"]
     lastname = request.form["lastname"]
     birthDate = request.form["birthDate"]
-    print (email, password, telephone, role, name, lastname, birthDate)
-    newUser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
-    db.session.add(newUser)  #creado y agregado a base de datos
+    newuser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
+    db.session.add(newuser)  #creado y agregado a base de datos
     db.session.commit()
     return ("Usuario creado con exito ")
 
@@ -80,12 +80,20 @@ if email == user & passwordin==pasword_ok:
 else:
     print ("Acceso Denegado")
     # retornar a home'''
-'''
+
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
 def sing_in():
-    return 'Aqui va el Acceso' # Acceso
+    return  render_template("signin_grocer.html") # Acceso
 
+@app.route('/signin_admin', methods=['POST'])
+def signin_admin():
+    email = request.form["email"]
+    passwordin = request.form["password"]
+    print ("Bienvenido" , email, passwordin)
+    #return (email, passwordin)
+
+'''
 @app.route('/adminstock')
 def admin_stock():
     return 'Aqui va el panel del administrar inventario, stock' # Panel de inventario
