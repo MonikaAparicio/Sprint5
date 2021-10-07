@@ -79,7 +79,7 @@ class NewUser(db.Model):
     email = db.Column(db.String, unique = True)
     password = db.Column(db.String)
     cedula = db.Column(db.Integer, unique = True)
-    telephone = db.Column(db.String)
+    telephone = db.Column(db.Integer)
     role = db.Column(db.String)
     name = db.Column(db.String)
     lastname = db.Column(db.String)
