@@ -71,7 +71,7 @@ def signin_admin():
     user = User(email, passwordin)  
     db.session.add(user)  #creado y agregado a base de datos
     db.session.commit()
-    return ("Usuario creado con exito ")
+    return ("Bienvenido")
     
 '''def get_user():
     user = NewUser.query.email() 
