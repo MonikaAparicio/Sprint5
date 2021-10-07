@@ -6,7 +6,7 @@ from sqlalchemy.orm import session
 
 app = Flask(__name__)
 #conexion a la base de datos: 'postgresql://<usuario>:<contraseña>@<direccion de la db>:<puerto>/<nombre de la db>'
-app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://vkxloqhhabrinb:6afc88e11ca5780df6635e9113813dcad93c3a94a8c3337f98ba2711ebcda892@ec2-35-171-171-27.compute-1.amazonaws.com:5432/dam05ju1pfpbir'
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql:://hbedjophdpnvtn:09012119aadbc480a7e10c78cb3559b8a32a8ef42e00fccf7fdff326cf164d0c@ec2-54-204-148-110.compute-1.amazonaws.com:5432/ddtcupulsd1301'
 # esta es la direccion para la base de datos local, ahora es remota de heroku linea anterior, y se va'postgresql://postgres:root@localhost:5432/mitiendadb2'
 #app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://postgres:root@localhost:5432/mitiendadb2'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
