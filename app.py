@@ -16,7 +16,7 @@ app.secret_key ='some-secret-key'
 db = SQLAlchemy(app) # este app o lo que sea va en el procfile kkllk:app
 
 # importar los modelos de las tablas que cree en el otro archivo
-from models import Product, NewUser
+from models import Product, NewUser, User
 
 
 #crear el esquema de la base de datos en postgre
@@ -68,9 +68,11 @@ def sing_in():
 def signin_admin():
     email = request.form["email"]
     passwordin = request.form["password"]
-    print ("Bienvenido" , email, passwordin)
-    #return (email, passwordin)
-
+    user = User(email, passwordin)  
+    db.session.add(user)  #creado y agregado a base de datos
+    db.session.commit()
+    return ("Usuario creado con exito ")
+    
 '''def get_user():
     user = NewUser.query.email() 
     password_ok = NewUser.query.password()

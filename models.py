@@ -59,18 +59,14 @@ class Product(db.Model):
         self.stockmin = stockmin
         self.amount = amount
 '''
-#tabla usuario
+#tabla usuario, registro de ingreso
 class User(db.Model):
     __tablename__ = 'User'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    telephone = db.Column(db.Integer)
-    rol = db.Column(db.String)
-    name = db.Column(db.String)
-    lastName = db.Column(db.String)
-
+    
     def __init__(self, email, password):
         self.email = email
         self.password = password
