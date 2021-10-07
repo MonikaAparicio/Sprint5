@@ -64,7 +64,7 @@ def sing_in():
 
 # acceso como administrador, debe ir al panel de administrador
 @app.route('/signin_admin', methods=['POST'])
-def singin_admin():
+def signin_admin():
     email = request.form["email"]
     passwordin = request.form["password"]
     print ("Bienvenido" , email, passwordin)
