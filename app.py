@@ -72,20 +72,17 @@ def signin_admin():
     emailin = request.form["email"]
     passwordin = request.form["password"]
 
-    admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin)
+    admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first
     print (admin[0].email)
-    if (admin == None):
+    try:
+
+        if (admin[0]is not None):
+            return render_template ("paneladmin.html")
+         
+    except:
         return render_template(signin_admin.html)
-    else:
-        return render_template ("paneladmin.html")
-    #password_ok = NewUser.query.filter_by(password = passwordin)
-
-    #if ((emailin == user.email) and (passwordin == password_ok.password)):
-        #return render_template ("paneladmin.html")
-    #else:
-        #return "Usuario o contraseña incorrectos"
-    # devolver a  /signin_admin
-
+    
+        
 '''
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
