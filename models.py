@@ -58,7 +58,9 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String, unique=True)
+    cedula = db.Column(db.Integer, unique=True)
     password = db.Column(db.String)
+    secondKey = db.Column(db.String, unique=True, nullable=True)
     
     def __init__(self, email, password):
         self.email = email

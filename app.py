@@ -72,11 +72,13 @@ def signin_admin():
     emailin = request.form["email"]
     passwordin = request.form["password"]
 
-    admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first
-    print (admin[0].email)
+    
+    admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first()
+    print (emailin, passwordin)
+    
     try:
 
-        if (admin[0]is not None):
+        if (admin is not None):
             return render_template ("paneladmin.html")
          
     except:
