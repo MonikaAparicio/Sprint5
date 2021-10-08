@@ -72,7 +72,6 @@ def signin_admin():
     emailin = request.form["email"]
     passwordin = request.form["password"]
 
-    
     admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first()
     print (emailin, passwordin)
     print (admin)
@@ -82,7 +81,7 @@ def signin_admin():
     else:
         return render_template("signin_admin.html")
     
-        
+ # hasta aqui funciona ok viernes 1pm       
 '''
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
