@@ -51,13 +51,11 @@ def create_user():
     lastname = request.form["lastname"]
     birthDate = request.form["birthDate"]
     newuser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
-    id_session = db.session.add(newuser)
-    #db.session.add(newuser)  #creado y agregado a base de datos
+    db.session.add(newuser)  #creado y agregado a base de datos
     db.session.commit()
-    print (id_session)
-    print (newuser.id)
+    
     #return ("Usuario creado con exito ")
-    return redirect(url_for("get_home"))    #regresa a home
+    return redirect(url_for("get_home", user = newuser.role))    #regresa a home
 
   #hasta aqui funciona ok octubre 7, 7pm 
     
