@@ -50,12 +50,14 @@ def create_user():
     name = request.form["name"]
     lastname = request.form["lastname"]
     birthDate = request.form["birthDate"]
+
     newuser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
     db.session.add(newuser)  #creado y agregado a base de datos
     db.session.commit()
     
     #return ("Usuario creado con exito ")
     return redirect(url_for("get_home", user = newuser.role))    #regresa a home
+    # con user= estoy pasando la info del role del newuser
 
   #hasta aqui funciona ok octubre 7, 7pm 
     
@@ -70,13 +72,18 @@ def signin_admin():
     emailin = request.form["email"]
     passwordin = request.form["password"]
 
-    user = NewUser.query.filter_by(email = emailin).first() 
-    password_ok = NewUser.query.by(password = passwordin).first() 
-
-    if ((emailin == user.email) and (passwordin == password_ok.password)):
-        return render_template ("paneladmin.html")
+    admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin)
+    print (admin[0].email)
+    if (admin == None):
+        return render_template(signin_admin.html)
     else:
-        return "Usuario o contraseña incorrectos"
+        return render_template ("paneladmin.html")
+    #password_ok = NewUser.query.filter_by(password = passwordin)
+
+    #if ((emailin == user.email) and (passwordin == password_ok.password)):
+        #return render_template ("paneladmin.html")
+    #else:
+        #return "Usuario o contraseña incorrectos"
     # devolver a  /signin_admin
 
 '''
