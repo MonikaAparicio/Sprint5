@@ -69,7 +69,7 @@
     <img src="https://img.freepik.com/vector-gratis/carro-tienda-edificio-tienda-dibujos-animados_138676-2085.jpg?size=338&ext=jpg" width="150">
     <!-- aqui se conecta frontend con la base de datos por medio de un formulario-->
     <!-- tomando la url de la sign_updata, entrada que se llama igual que lo que llega del post request--> 
-    <form action="{{url_for('create_user')}}" method="post">
+    <form action="{{url_for('second_key')}}" method="post">
       
       <div>
         <input type="text" name="email" placeholder="E-mail"
@@ -81,10 +81,10 @@
         <input type="password" name="password" placeholder="Contraseña"
       </div>
       <div>
-        <input type="text" name="secondkey" placeholder="Segunda Clave"
+        <input type="password" name="secondkey" placeholder="Segunda Clave"
       </div>
       <div>
-        <input type="text" name="secondkey2" placeholder="Confirme Segunda Clave"
+        <input type="password" name="secondkey2" placeholder="Confirme Segunda Clave"
       </div>
       <div>
         <!-- presiono el boton y se envian los datos a la url por un post request-->

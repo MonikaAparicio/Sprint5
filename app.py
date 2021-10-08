@@ -56,17 +56,15 @@ def create_user():
     db.session.commit()
     
     #return ("Usuario creado con exito ")
-    return redirect(url_for("get_home", user = newuser.role))    #regresa a home
+    return redirect(url_for("get_home"))    #regresa a home
     # con user= estoy pasando la info del role del newuser
 
-  #hasta aqui funciona ok octubre 7, 7pm 
-    
-# ingreso para ingreso, viene de home Administrador
+# ingreso, viene de home Administrador
 @app.route('/signin')
 def sing_in():
     return  render_template("signin_admin.html")
 
-# acceso como administrador, debe ir al panel de administrador
+# acceso como administrador, debe ir al panel de administrador o retornar aca
 @app.route('/signin_admin', methods=['POST'])
 def signin_admin():
     emailin = request.form["email"]
@@ -80,35 +78,69 @@ def signin_admin():
             return render_template("paneladmin.html")
     else:
         return render_template("signin_admin.html")
-    
- # hasta aqui funciona ok viernes 1pm       
-'''
+
+#falta que con tres intentos se bloquee
+# hasta aqui funciona ok viernes 1pm       
+
 # acceso como tendero, viene de Home, va al manejo de ventas y compras
 @app.route('/signin_grocer')
 def sing_grocer():
-    return  render_template("signin_grocer.html") # Acceso
+    return render_template("signin_grocer.html") # Acceso
 
 @app.route('/signin_grocerin', methods=['POST'])
 def signin_grocerin():
-    email = request.form["email"]
+    emailin = request.form["email"]
     passwordin = request.form["password"]
-    user = User(email, passwordin)  
-    db.session.add(user)  #creado y agregado a base de datos
-    db.session.commit()
-    return ("Bienvenido Tendero")
-'''
+
+    tender = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first()
+    print (emailin, passwordin)
+    print (tender)
+    
+    if (tender is not None):
+            return render_template("panelTendero.html")
+    else:
+        return render_template("signin_grocer.html")
+
 #@app.route('//<user>') para usar si el rol es administrador
 #def get_home(user):
     #return render_template("index.html", user)
+
+# Del panel de administrador a estadisticas
+@app.route('/statistics')
+def statistics():
+    return render_template("Estadisticas.html") # Historial y estadisticas
+
+# Del panel de administrador a gestion de segunda clave
+@app.route('/second_key_get')
+def second_key_get():
+    return render_template("secondkey.html")
+
+@app.route('/second_key', methods=['POST']) 
+def second_key():
+    emailk = request.form["email"] #trae los datos de los form de html
+    cedulak = request.form["cedula"]
+    passwordk = request.form["password"]
+    secondkey = request.form["secondkey"]
+    secondkey2 = request.form["secondkey2"]
+
+    #confirsk = NewUser.query.filter(NewUser.email == email, NewUser.cedula==cedula, NewUser.password==password).first()
+    print (emailk, cedulak, passwordk, secondkey, secondkey2)
+    #print (confirsk)
+    
+    #if ((confirsk is not None) and (secondkey==secondkey2)):
+     #       return render_template("paneladmin.html")
+   # else:
+     #   return render_template("secondkey.html")
+    
+
+
 '''
 @app.route('/adminstock')
 def admin_stock():
     return 'Aqui va el panel del administrar inventario, stock' # Panel de inventario
+'''
 
-@app.route('/statistics')
-def statistics():
-    return 'Aqui va el panel de estadisticas e historial' # Historial y estadisticas
-
+'''
 @app.route('/sales')
 def sales():
     return 'Aqui va el panel de ventas' # Gestion de ventas de la tienda
