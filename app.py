@@ -29,9 +29,9 @@ db.session.commit() #guardar los cambios siempre, crea  las tablas
 # y el modelo, en este caso DB
 
 # Pagina principal de la aplicacion, envia al registro o al ingreso como Admin o Tendero
-@app.route('//<user>')
-def get_home(user):
-    return render_template("index.html", user) # Home
+@app.route('/')
+def get_home():
+    return render_template("index.html") # Home
 
 # ingreso para registro, viene de home
 @app.route('/signup')
@@ -94,6 +94,9 @@ def signin_grocerin():
     db.session.commit()
     return ("Bienvenido Tendero")
 '''
+#@app.route('//<user>') para usar si el rol es administrador
+#def get_home(user):
+    #return render_template("index.html", user)
 '''
 @app.route('/adminstock')
 def admin_stock():
