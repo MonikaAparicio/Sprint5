@@ -5,60 +5,53 @@ from app import db #importo la tabla de app.py
 class Product(db.Model):
     __tablename__ = 'Product'
 
-    #agregar id uml
     id_Product = db.Column(db.Integer, primary_key = True, autoincrement = True)    
     name = db.Column(db.String)
     codeProduct = db.Column(db.Integer)
     brand = db.Column(db.String, nullable=True)
     productType = db.Column(db.String, nullable=True)
-    ##admissionDate = db.Column(db.Integer) este dato este en el input
     measureUnit = db.Column(db.String)
     ivaTax = db.Column(db.Integer)
     stock = db.Column(db.Integer)
     stockmin = db.Column(db.Integer)
-    ##amount = db.Column(db.ForeignKey("Input.amount"))
+    #amount = db.Column(db.ForeignKey("Input.amount"))
     salePrice = db.Column(db.Integer) # este se necesita pero formulado salePrice=Input.purchasePrice*ivaTax*%ganancia
 
-    def __init__(self, name, codeProduct, brand, productType, admissionDate, measureUnit, ivaTax, stock, stockmin, salePrice):
+    def __init__(self, name, codeProduct, brand, productType,  measureUnit, ivaTax, stock, stockmin, salePrice):
         self.name = name
         self.codeProduct = codeProduct
         self.brand = brand
         self.productType = productType
-        self.admissionDate = admissionDate
         self.measureUnit = measureUnit
         self.ivaTax = ivaTax
         self.stock = stock
         self.stockmin = stockmin
+        #self.amount = amount
         self.salePrice = salePrice
-       
-#tabla inventario
-'''class inventary (db.Model):
-    __tablename__ = 'inventary'
-    #agregar id uml
-    id = db.Column (db.Integer, primary_key = True, autoincrement = True)    
-    name = db.Column(db.ForeignKey("products.name"))
-    codeProduct = db.Column(db.ForeignKey("products.codeProduct"))
-    brand = db.Column(db.ForeignKey("products.brand"))
-    productType = db.Column(db.ForeignKey("products.productType"))
-    admissionDate = db.Column(db.ForeignKey("products.admissionDate"))
-    measureUnit = db.Column(db.ForeignKey("products.measureUnit"))
-    ivaTax = db.Column(db.ForeignKey("products.ivaTax"))
-    stock = db.Column(db.ForeignKey("products.stock"))
-    stockmin = db.Column(db.Integer)
-    amount = db.Column(db.ForeignKey("Input.amount"))
+   
 
-    def __init__(self, name, codeProduct, brand, productType, admissionDate, measureUnit, ivaTax, stock, stockmin, amount):
-        self.name = name
-        self.codeProduct = codeProduct
-        self.brand = brand
-        self.productType = productType
+#table inventary
+class inventary (db.Model):
+    __tablename__ = 'inventary'
+    id = db.Column (db.Integer, primary_key = True, autoincrement = True) 
+    id_Product = db.Column(db.ForeignKey("Product.id_Product"))
+    #name = db.Column(db.ForeignKey("products.name"))
+    #codeProduct = db.Column(db.ForeignKey("products.codeProduct"))
+    #brand = db.Column(db.ForeignKey("products.brand"))
+    #productType = db.Column(db.ForeignKey("products.productType"))
+    admissionDate = db.Column(db.Integer)
+    #measureUnit = db.Column(db.ForeignKey("products.measureUnit"))
+    #ivaTax = db.Column(db.ForeignKey("products.ivaTax"))
+    #stock = db.Column(db.ForeignKey("products.stock"))
+    #stockmin = db.Column(db.Integer)
+    id_input = db.Column(db.ForeignKey("Input.id"))
+    #cantidad = db.Column("products.stock"+"Input.amount"-"Saledetail.amount_sale") amarrado a la llave foranea de id_product
+    
+    def __init__(self, id_product, admissionDate, id_input):
+        self.id_product = id_product
         self.admissionDate = admissionDate
-        self.measureUnit = measureUnit
-        self.ivaTax = ivaTax
-        self.stock = stock
-        self.stockmin = stockmin
-        self.amount = amount
-'''
+        self.id_input = id_input   
+
 #tabla usuario, registro de ingreso
 class User(db.Model):
     __tablename__ = 'User'
