@@ -7,8 +7,8 @@ from sqlalchemy.orm import session
 app = Flask(__name__)
 #conexion a la base de datos: 'postgresql://<usuario>:<contraseña>@<direccion de la db>:<puerto>/<nombre de la db>'
 app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://hbedjophdpnvtn:09012119aadbc480a7e10c78cb3559b8a32a8ef42e00fccf7fdff326cf164d0c@ec2-54-204-148-110.compute-1.amazonaws.com:5432/ddtcupulsd1301'
-# esta es la direccion para la base de datos local, ahora es remota de heroku linea anterior, y se va'postgresql://postgres:root@localhost:5432/mitiendadb2'
-#app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://postgres:root@localhost:5432/mitiendadb2'
+# esta es la direccion para la base de datos local, ahora es remota de heroku linea anterior, y se va'postgresql://postgres:root@localhost:5432/mitiendadbmk'
+#app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://postgres:root@localhost:5432/mitiendadbmk'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key ='some-secret-key'
 
@@ -51,11 +51,16 @@ def create_user():
     lastname = request.form["lastname"]
     birthDate = request.form["birthDate"]
     newuser = NewUser(email, password,cedula, telephone, role, name, lastname, birthDate)  
-    db.session.add(newuser)  #creado y agregado a base de datos
+    id_session = db.session.add(newuser)
+    #db.session.add(newuser)  #creado y agregado a base de datos
     db.session.commit()
+    print (id_session)
+    print (newuser.id)
     #return ("Usuario creado con exito ")
-    return redirect(url_for("get_home"))    # falta hacer que regrese a home
-      
+    return redirect(url_for("get_home"))    #regresa a home
+
+  #hasta aqui funciona ok octubre 7, 7pm 
+    
 # ingreso para ingreso, viene de home Administrador
 @app.route('/signin')
 def sing_in():
