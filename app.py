@@ -75,14 +75,12 @@ def signin_admin():
     
     admin = NewUser.query.filter(NewUser.email == emailin, NewUser.password==passwordin).first()
     print (emailin, passwordin)
+    print (admin)
     
-    try:
-
-        if (admin is not None):
-            return render_template ("paneladmin.html")
-         
-    except:
-        return render_template(signin_admin.html)
+    if (admin is not None):
+            return render_template("paneladmin.html")
+    else:
+        return render_template("signin_admin.html")
     
         
 '''
