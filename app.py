@@ -110,6 +110,40 @@ def signin_grocerin():
 def statistics():
     return render_template("Estadisticas.html") # Historial y estadisticas
 
+@app.route('/delete_user')
+def delete_user():
+    return render_template("/delete_user.html") # Acceso
+
+@app.route('/delete_user_post', methods=["POST"])
+def delete_user_post():
+    user_cedula=request.form["cedula"]
+    userdelete = NewUser.query.filter_by(cedula=user_cedula).first()
+    db.session.delete(userdelete)
+    db.session.commit()
+    print ("Se borro usuario", userdelete)
+    return render_template("paneladmin.html")
+
+@app.route('/update_user')
+def update_user():
+    return render_template("/update_user.html") # Acceso
+#esta parte aun no funciona
+@app.route('/update_user_post', methods=["POST"])
+def update_user_post():
+    old_name =request.form["cedula"]
+    new_name =request.form["Newcedula"]
+    old_user = NewUser.query.filter_by(cedula=old_name).first() #esto es una consulta por columna name, el primer campo
+    old_user.cedula = new_name # se cambia el nombre
+    db.session.commit()
+    return "actualizacion exitosa" 
+def update_user():
+    old_name ="leche"
+    new_name = "leche deslactosada"
+    old_product = Product.query.filter_by(name=old_name).first() #esto es una consulta por columna name, el primer campo
+    old_product.name = new_name # se cambia el nombre
+    db.session.commit()
+    return "actualizacion exitosa"
+    
+
 # Del panel de administrador a gestion de segunda clave
 @app.route('/second_key_get')
 def second_key_get():
@@ -123,14 +157,14 @@ def second_key():
     secondkey = request.form["secondkey"]
     secondkey2 = request.form["secondkey2"]
 
-    #confirsk = NewUser.query.filter(NewUser.email == email, NewUser.cedula==cedula, NewUser.password==password).first()
+    confirsk = NewUser.query.filter(NewUser.email == emailk, NewUser.cedula==cedulak, NewUser.password==passwordk).first()
     print (emailk, cedulak, passwordk, secondkey, secondkey2)
-    #print (confirsk)
+    print (confirsk)
     
-    #if ((confirsk is not None) and (secondkey==secondkey2)):
-     #       return render_template("paneladmin.html")
-   # else:
-     #   return render_template("secondkey.html")
+    if ((confirsk is not None) and (secondkey==secondkey2)):
+            return render_template("paneladmin.html")
+    else:
+        return render_template("secondkey.html")
     
 
 
