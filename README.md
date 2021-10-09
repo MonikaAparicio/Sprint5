@@ -1,4 +1,4 @@
-
+# <a href="https://tiendatic8.herokuapp.com/">SITIO OFICIAL
 # mitienda.com
 El objetivo del presente proyecto es desarrollar una página WEB para la creación de una tienda virtual llamada mitienda.com que permita a cada tendero registrar en ella la información de su tienda con el fin de tener un control de los ingresos, egresos e inventarios de su negocio.
 
